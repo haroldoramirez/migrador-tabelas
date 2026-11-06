@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrador de Tabelas</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --success-bg: rgba(16, 185, 129, 0.12);
+            --success-border: #10b981;
+            --error-bg: rgba(239, 68, 68, 0.12);
+            --error-border: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 560px;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--muted);
+            font-size: 0.925rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem 0.875rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background-color: var(--bg);
+            color: var(--text);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            border-color: var(--primary);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.85rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .alert {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .alert-success {
+            background-color: var(--success-bg);
+            border: 1px solid var(--success-border);
+        }
+
+        .alert-error {
+            background-color: var(--error-bg);
+            border: 1px solid var(--error-border);
+        }
+
+        .meta {
+            margin-top: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .sql-box {
+            margin-top: 0.75rem;
+            padding: 0.65rem 0.85rem;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: Consolas, monospace;
+            font-size: 0.8rem;
+            color: #93c5fd;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Migrador de Tabelas</h1>
+    <p class="subtitle">Selecione a tabela de origem e defina o limite de registros para migrar ao banco de destino.</p>
+
+    <form th:action="@{/migrador}" th:object="${migracaoForm}" method="post">
+        <div class="form-group">
+            <label for="tabelas">Tabelas</label>
+            <select id="tabelas" name="tabelas" th:field="*{tabelas}" required>
+                <option value="" disabled selected>Selecione uma tabela...</option>
+                <option th:each="item : ${listaTabelas}"
+                        th:value="${item.codigo}"
+                        th:text="${item.nome + ' (' + item.descricao + ')'}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="limiteRegistros">Limite de registros</label>
+            <input type="number"
+                   id="limiteRegistros"
+                   name="limiteRegistros"
+                   th:field="*{limiteRegistros}"
+                   min="1"
+                   placeholder="Ex: 1000"
+                   required/>
+        </div>
+
+        <button type="submit">Migrar</button>
+    </form>
+
+    <div th:if="${resultado != null}" class="alert alert-success">
+        <strong th:text="${resultado.mensagem}"></strong>
+        <div class="meta">
+            <span>Tabela: <code th:text="${resultado.codigoTabela}"></code></span> |
+            <span>Strategy acionada: <code th:text="${resultado.nomeEstrategia}"></code></span> |
+            <span>Limite: <code th:text="${resultado.limiteRegistros}"></code></span>
+        </div>
+        <div class="sql-box" th:text="${resultado.queryExecutada}"></div>
+    </div>
+
+    <div th:if="${erro != null}" class="alert alert-error">
+        <strong th:text="${erro}"></strong>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\controller\MigradorController.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\dao\impl\MigracaoDaoImpl.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\dao\MigracaoDao.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\MigradorApplication.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\model\MigracaoForm.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\model\ResultadoMigracao.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\model\TabelaItem.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\service\MigracaoStrategyService.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\strategy\impl\ClientesMigracaoStrategy.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\strategy\impl\PedidosMigracaoStrategy.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\strategy\impl\ProdutosMigracaoStrategy.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\strategy\impl\UsuariosMigracaoStrategy.java
+H:\10.ia\projects\java\migrador-tabelas\src\main\java\com\migrador\strategy\MigracaoTabelaStrategy.java

@@ -1,0 +1,14 @@
+com\migrador\service\MigracaoStrategyService$1.class
+com\migrador\controller\MigradorController.class
+com\migrador\strategy\impl\ProdutosMigracaoStrategy.class
+com\migrador\dao\impl\MigracaoDaoImpl.class
+com\migrador\strategy\impl\ClientesMigracaoStrategy.class
+com\migrador\strategy\impl\PedidosMigracaoStrategy.class
+com\migrador\model\MigracaoForm.class
+com\migrador\model\ResultadoMigracao.class
+com\migrador\model\TabelaItem.class
+com\migrador\dao\MigracaoDao.class
+com\migrador\MigradorApplication.class
+com\migrador\strategy\impl\UsuariosMigracaoStrategy.class
+com\migrador\strategy\MigracaoTabelaStrategy.class
+com\migrador\service\MigracaoStrategyService.class
